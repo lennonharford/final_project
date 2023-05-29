@@ -1,0 +1,29 @@
+title: str = "The Shadows Of War"
+fps: int = 60
+pixel_size: int = 3
+tile_size: int = 16 * pixel_size
+window_margin: int = 5 * pixel_size
+window_width: int = 16 * tile_size + 2 * window_margin
+window_height: int = 9 * tile_size + 2 * window_margin
+margin_left: int = window_margin
+margin_right: int = window_width - window_margin
+margin_top: int = window_margin
+margin_bottom: int = window_height - window_margin
+window_dimensions: tuple[int, int] = window_width, window_height
+tick: int = 0
+gamestates: tuple[str, ...] = 'start', 'main', 'end'
+gamestate: str = gamestates[0]
+
+
+# TITLE: str = "The Shadows Of War"
+# FPS: int = 60
+# PIXEL_SIZE: int = 3
+# TILE_SIZE: int = 16 * PIXEL_SIZE
+# WINDOW_MARGIN: int = 5 * PIXEL_SIZE
+# WINDOW_WIDTH: int = 16 * TILE_SIZE + 2 * WINDOW_MARGIN
+# WINDOW_HEIGHT: int = 9 * TILE_SIZE + 2 * WINDOW_MARGIN
+# MARGIN_LEFT: int = WINDOW_MARGIN
+# MARGIN_RIGHT: int = WINDOW_WIDTH - WINDOW_MARGIN
+# MARGIN_TOP: int = WINDOW_MARGIN
+# MARGIN_BOTTOM: int = WINDOW_HEIGHT - WINDOW_MARGIN
+# WINDOW_DIMENSIONS: tuple[int, int] = WINDOW_WIDTH, WINDOW_HEIGHT
