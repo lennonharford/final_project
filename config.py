@@ -11,7 +11,7 @@ margin_top: int = window_margin
 margin_bottom: int = window_height - window_margin
 window_dimensions: tuple[int, int] = window_width, window_height
 tick: int = 0
-gamestates: tuple[str, ...] = 'start', 'main', 'end'
+gamestates: tuple[str, ...] = 'menu', 'main', 'end'
 gamestate: str = gamestates[0]
 
 

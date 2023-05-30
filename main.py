@@ -2,7 +2,6 @@
 # Date: 5/29/2023
 # Program Details:
 
-
 # imports
 import pygame
 from pygame import sprite, display, mixer, time
@@ -11,6 +10,7 @@ import colors
 import config as conf
 from random import choice, choices
 from pygame.math import Vector2 as Vector
+import sqlite3 as sql
 
 # returns true if the anything in the group has reached the left or right margin
 def reached_margin(group: sprite.Group | sprite.GroupSingle) -> bool:
