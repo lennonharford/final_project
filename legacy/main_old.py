@@ -9,41 +9,37 @@ import pygame
 from pygame import sprite, display, mixer, time
 import sys
 import colors
-import config as conf
-from random import choice, choices
-from pygame.math import Vector2 as Vector
+import config
+from random import choice
+
 
 # returns true if the anything in the group has reached the left or right margin
 def reached_margin(group: sprite.Group | sprite.GroupSingle) -> bool:
     if type(group) == sprite.Group:
         for item in group.sprites():
-            if item.rect.left == conf.margin_left or item.rect.right == conf.margin_right:
+            if item.rect.left == config.margin_left or item.rect.right == config.margin_right:
                 return True
         return False
     elif type(group) == sprite.GroupSingle:
-        return group.sprite.rect.left == conf.margin_left or group.sprite.rect.right == conf.margin_right
+        return group.sprite.rect.left == config.margin_left or group.sprite.rect.right == config.margin_right
 
 # updates the main clock which everything is based on      
 def update_tick() -> None:
-    if conf.tick == 60:
-        conf.tick = 0
+    if tick == 60:
+        tick: int = 0
     else:
-        conf.tick += 1
+        tick += 1
         
 # the main function of this program
 def main() -> None:
     # setting and resetting values
-    display.set_caption(conf.title)
-        
+    display.set_caption(config.title)
+
+    won: bool | None = None
+    
     # main game loop
     while True:
-        
-        if conf.gamestate == conf.gamestates[0]:
-            menu()
-        elif conf.gamestate == conf.gamestates[1]:
-            game()
-        else:
-            exit()
+        window.fill(colors.BLACK)
                 
         # event loop
         for event in pygame.event.get():
@@ -52,14 +48,38 @@ def main() -> None:
         
         # updates the display and advances the clock
         pygame.display.update()
-        clock.tick(conf.fps)
+        clock.tick(config.fps)
         update_tick()
+    
+    # secondary game loop for winning/losing screen
+    while True:
+        # clears the window
+        window.fill(colors.BLACK)    
         
-def menu() -> None:
-    window.fill(colors.BLACK)
-
-def game() -> None:
-    pass
+        # draws the you lose or you win
+        if won:
+            you_won_btn.draw(window)
+        else:
+            game_over_btn.draw(window)
+            
+        # draws the restart button
+        restart_btn.draw(window)
+        
+        # exits the loop if the button is clicked
+        if restart_btn.sprite.clicked():
+            break
+            
+        # event loop
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+        
+        # updates the display and advances the clock
+        display.update()
+        clock.tick(config.fps)
+        
+    # recurses back to the main function if restart has been clicked
+    main()
     
 def exit() -> None:
     # runs when the game is closed
@@ -67,10 +87,13 @@ def exit() -> None:
     pygame.quit()
     sys.exit()
 
+
 if __name__ == "__main__":
     pygame.init()
     
     clock = time.Clock()
-    window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE | pygame.SCALED | pygame.RESIZABLE)
-        
+    window = display.set_mode(config.window_dimensions, pygame.HWSURFACE)
+    tick: int = 0
+    gamestates: tuple[str, ...] = 'start', 'main', 'end'
+    
     main()
