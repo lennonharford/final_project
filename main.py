@@ -1,8 +1,7 @@
-# By: Lennon Harford
-# Date: 2023-05-05
-# Program Details:  The player controls a turret which shoots at aliens. 
-#                   If he or the aliens hit the bunkers, they lose health, and eventually break down. 
-#                   The player needs to shoot all of the aliens before they shoot him or reach earth
+# By: Lennon, Sali
+# Date: 5/29/2023
+# Program Details:
+
 
 # imports
 import pygame
