@@ -13,17 +13,3 @@ window_dimensions: tuple[int, int] = window_width, window_height
 tick: int = 0
 gamestates: tuple[str, ...] = 'menu', 'main', 'end'
 gamestate: str = gamestates[0]
-
-
-# TITLE: str = "The Shadows Of War"
-# FPS: int = 60
-# PIXEL_SIZE: int = 3
-# TILE_SIZE: int = 16 * PIXEL_SIZE
-# WINDOW_MARGIN: int = 5 * PIXEL_SIZE
-# WINDOW_WIDTH: int = 16 * TILE_SIZE + 2 * WINDOW_MARGIN
-# WINDOW_HEIGHT: int = 9 * TILE_SIZE + 2 * WINDOW_MARGIN
-# MARGIN_LEFT: int = WINDOW_MARGIN
-# MARGIN_RIGHT: int = WINDOW_WIDTH - WINDOW_MARGIN
-# MARGIN_TOP: int = WINDOW_MARGIN
-# MARGIN_BOTTOM: int = WINDOW_HEIGHT - WINDOW_MARGIN
-# WINDOW_DIMENSIONS: tuple[int, int] = WINDOW_WIDTH, WINDOW_HEIGHT
