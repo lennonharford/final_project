@@ -12,6 +12,9 @@ from random import choice, choices
 from pygame.math import Vector2 as Vector
 import sqlite3 as sql
 
+
+# 16*9\
+
 # returns true if the anything in the group has reached the left or right margin
 def reached_margin(group: sprite.Group | sprite.GroupSingle) -> bool:
     if type(group) == sprite.Group:
@@ -65,6 +68,9 @@ def exit() -> None:
     mixer.stop()
     pygame.quit()
     sys.exit()
+    
+def populate_chunk() -> None:
+    pass
 
 if __name__ == "__main__":
     pygame.init()
