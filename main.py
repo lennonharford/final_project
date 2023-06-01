@@ -11,7 +11,7 @@ import config as conf
 from random import choice, choices
 from pygame.math import Vector2 as Vector
 import sqlite3 as sql
-
+from tile import Tile
 
 # 16*9\
 
@@ -40,12 +40,16 @@ def main() -> None:
     # main game loop
     while True:
         
-        if conf.gamestate == conf.gamestates[0]:
-            menu()
-        elif conf.gamestate == conf.gamestates[1]:
-            game()
-        else:
-            exit()
+        window.fill(colors.BLACK)
+        
+        
+        
+        #if conf.gamestate == conf.gamestates[0]:
+        #    menu()
+        #elif conf.gamestate == conf.gamestates[1]:
+        #    game()
+        #else:
+        #    exit()
                 
         # event loop
         for event in pygame.event.get():
@@ -72,10 +76,39 @@ def exit() -> None:
 def populate_chunk() -> None:
     pass
 
+
+def get_image(x: int, y: int, size: int, path: str) -> pygame.Surface:
+    try:
+        sheet = pygame.image.load(path).convert()
+    except pygame.error as e:
+        raise SystemExit(e)
+    
+    rect = pygame.Rect(x, y, x+size, y+size)
+    image = pygame.Surface(rect.size).convert_alpha()
+    image.blit(sheet, (0, 0), rect)
+
+    return image
+
+def populate_tiles():
+    tiles = []
+    x, y = conf.chunk_dimensions
+    
+    for i, col in enumerate(tiles):
+        row = []
+        
+        
+
 if __name__ == "__main__":
     pygame.init()
     
     clock = time.Clock()
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE | pygame.SCALED | pygame.RESIZABLE)
-        
+    #tiles = []
+    # tiles = [
+    #     [00, 01, 02],
+    #     [10, 11, 12],
+    #     [20, 21, 22]
+    # ]
+    
+    # tile[0][2]
     main()
