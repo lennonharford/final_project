@@ -5,7 +5,7 @@
 import pygame
 import sys
 import config as conf
-from pygame.math import Vector2 as Vector
+from vector import Vector
 
 # class Tile(pygame.sprite.Sprite):
 #     def __init__(self, pos: Vector, image_path: str) -> None:
@@ -37,13 +37,12 @@ def get_image(x: int, y: int, size: int, path: str) -> pygame.Surface:
     return image 
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, x, y) -> None:
+    def __init__(self, tilex, tiley) -> None:
         super().__init__()
+        self.pos = Vector(tilex, tiley)
         self.size: int = conf.tile_size
         self.margin_left: int = conf.margin_left
         self.margin_top: int = conf.margin_top
-        self.pos: Vector = Vector(x, y)
-        self.tilepos: Vector
         
     # def update(self) -> None:
     #     self.image = pygame.transform.scale(pygame.image.load(self.image_path), self.size).convert_alpha()
@@ -52,11 +51,10 @@ class Tile(pygame.sprite.Sprite):
     #     self.rect.x = self.margin_left + self.size * self.pos.x
     #     self.rect.y = self.margin_top + self.size * self.pos.y
     
-    def draw(self, tilex: int, tiley: int, sheet: str):
+    def draw(self, sheet: str):
         #self.image = pygame.transform.scale(pygame.image.load(self.image_path), self.size).convert_alpha()
         self.sheet: str = sheet
-        self.tilepos = Vector(tilex, tiley)
-        self.image: pygame.Surface = get_image(self.tilepos.x, self.tilepos.y, self.size, sheet)
+        self.image: pygame.Surface = get_image(self.pos.x, self.pos.y, self.size, sheet)
         self.mask: pygame.mask.Mask = pygame.mask.from_surface(self.image)
         self.rect: pygame.Rect = self.image.get_rect()
         self.rect.x: float = self.margin_left + self.size * self.pos.x

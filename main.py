@@ -9,9 +9,12 @@ import sys
 import colors
 import config as conf
 from random import choice, choices
-from pygame.math import Vector2 as Vector
+# from pygame.math import Vector2 as Vector
 import sqlite3 as sql
 from tile import Tile
+from vector import Vector
+
+
 
 # 16*9\
 
@@ -91,10 +94,13 @@ def get_image(x: int, y: int, size: int, path: str) -> pygame.Surface:
 
 def populate_tiles():
     tiles = []
-    x, y = conf.chunk_dimensions
+    chunk = conf.chunk_dimensions
     
-    for i, col in enumerate(tiles):
-        row = []
+    for width in range(chunk.x):
+        for height in range(chunk.y):
+            tiles[width][height] = f"x: {width}, y: {height}"
+        
+    return tiles
         
         
 
@@ -111,4 +117,5 @@ if __name__ == "__main__":
     # ]
     
     # tile[0][2]
+    # tile[2][2]
     main()

@@ -1,4 +1,6 @@
-from pygame.math import Vector2 as Vector
+# from pygame.math import Vector2 as Vector
+from vector import Vector
+
 
 title: str = "The Shadows Of War"
 chunk_dimensions: Vector = Vector(16, 9)
