@@ -11,11 +11,3 @@ def populate_tiles():
             col.append(Tile(i, j))
         tiles.append(col)
     return tiles
-
-x = populate_tiles()
-
-for thing in x:
-    print(thing)
-    
-    
-print("\n\n | {} |".format(x[3][4]))

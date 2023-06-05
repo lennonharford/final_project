@@ -51,7 +51,7 @@ class Tile(pygame.sprite.Sprite):
     #     self.rect.x = self.margin_left + self.size * self.pos.x
     #     self.rect.y = self.margin_top + self.size * self.pos.y
     
-    def draw(self, sheet: str):
+    def draw_1(self, sheet: str):
         #self.image = pygame.transform.scale(pygame.image.load(self.image_path), self.size).convert_alpha()
         self.sheet: str = sheet
         self.image: pygame.Surface = get_image(self.pos.x, self.pos.y, self.size, sheet)
@@ -59,3 +59,5 @@ class Tile(pygame.sprite.Sprite):
         self.rect: pygame.Rect = self.image.get_rect()
         self.rect.x: float = self.margin_left + self.size * self.pos.x
         self.rect.y: float = self.margin_top + self.size * self.pos.y
+    
+    def draw(self, sheet, tile)

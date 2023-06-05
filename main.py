@@ -94,28 +94,21 @@ def get_image(x: int, y: int, size: int, path: str) -> pygame.Surface:
 
 def populate_tiles():
     tiles = []
-    chunk = conf.chunk_dimensions
-    
-    for width in range(chunk.x):
-        for height in range(chunk.y):
-            tiles[width][height] = f"x: {width}, y: {height}"
-        
+    rows, cols = conf.chunk_dimensions
+    for i in range(rows):
+        col = []
+        for j in range(cols):
+            col.append(Tile(i, j))
+        tiles.append(col)
     return tiles
-        
-        
 
 if __name__ == "__main__":
     pygame.init()
     
     clock = time.Clock()
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE | pygame.SCALED | pygame.RESIZABLE)
-    #tiles = []
-    # tiles = [
-    #     [00, 01, 02],
-    #     [10, 11, 12],
-    #     [20, 21, 22]
-    # ]
+    tiles: list[list[Tile]] = populate_tiles()
     
-    # tile[0][2]
-    # tile[2][2]
+    tiles[0][2].draw()
+
     main()
