@@ -13,4 +13,4 @@ class Vector(object):
         return not self.__eq__(other)
     
     def __iter__(self):
-        return iter([self.x, self.y])
+        return iter((self.x, self.y))

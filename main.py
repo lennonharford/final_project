@@ -13,8 +13,26 @@ from random import choice, choices
 import sqlite3 as sql
 from tile import Tile
 from vector import Vector
+from chunk import Chunk
 
-
+chunk1 = [
+    ['x','x','x','x','x','x','x','x','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x',' ',' ',' ',' ',' ',' ',' ','x'],
+    ['x','x','x','x','x','x','x','x','x']
+]
 
 # 16*9\
 
@@ -44,6 +62,7 @@ def main() -> None:
     while True:
         
         window.fill(colors.BLACK)
+        chunk.draw(window)
         
         
         
@@ -106,9 +125,11 @@ if __name__ == "__main__":
     pygame.init()
     
     clock = time.Clock()
-    window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE | pygame.SCALED | pygame.RESIZABLE)
-    tiles: list[list[Tile]] = populate_tiles()
+    window = pygame.display.set_mode((conf.window_dimensions.x, conf.window_dimensions.y), pygame.HWSURFACE) #| pygame.SCALED | pygame.RESIZABLE)
+    #tiles: list[list[Tile]] = populate_tiles()
     
-    tiles[0][2].draw()
-
+    #tiles[0][2].draw()
+    
+    chunk = sprite.GroupSingle(Chunk("assets/images/test_chunk.png", chunk1))
+    
     main()

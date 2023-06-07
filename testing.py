@@ -11,3 +11,20 @@ def populate_tiles():
             col.append(Tile(i, j))
         tiles.append(col)
     return tiles
+
+
+l = [
+    "xxxx",
+    "xxxx",
+    "xxxx"
+]
+
+def transpose(array: list) -> list:
+    return map(lambda *x: list(x), *array)
+
+
+for x in l:
+    print(x)
+    
+for x in transpose(l):
+    print(x)

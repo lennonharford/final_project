@@ -60,4 +60,5 @@ class Tile(pygame.sprite.Sprite):
         self.rect.x: float = self.margin_left + self.size * self.pos.x
         self.rect.y: float = self.margin_top + self.size * self.pos.y
     
-    def draw(self, sheet, tile)
+    def draw(self, sheet, tile):
+        pass
