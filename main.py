@@ -1,8 +1,21 @@
-# By: Lennon, Sali
-# Date: 5/29/2023
-# Program Details:
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-# imports
+__authors__    = ["Lennon", "Sali"]
+__copyright__  = "Copyright 4 B.C"
+__license__    = "Free"
+__version__    = "1.0.1"
+__maintainer__ = "No one"
+__emails__     = ["lennonh45@kprschools.ca", "salmahs24@kprschools.ca"]
+__status__     = "Production"
+
+'''
+Date: 5/29/2023
+Program Details:
+
+X
+'''
+
 import pygame
 from pygame import sprite, display, mixer, time
 import sys
