@@ -1,7 +1,7 @@
 import pygame
 import sys
-import config as conf
-from vector import Vector
+import old_shit.config as conf
+from old_shit.vector import Vector
 
 class Chunk(pygame.sprite.Sprite):
     def __init__(self, sheet, array) -> None:

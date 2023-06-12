@@ -1,6 +1,6 @@
-import config as conf
-from vector import Vector
-from tile import Tile
+import old_shit.config as conf
+from old_shit.vector import Vector
+from old_shit.tile import Tile
     
 def populate_tiles():
     tiles = []

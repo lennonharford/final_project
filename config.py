@@ -1,15 +1,11 @@
-# from pygame.math import Vector2 as Vector
-from vector import Vector
-
-
 title: str = "The Shadows Of War"
-chunk_dimensions: Vector = Vector(16, 9)
+chunk_width = 16
+chunk_height = 9
+chunk_dimensions = chunk_width, chunk_height
 fps: int = 60
 pixel_size: int = 3
 tile_size: int = 16*pixel_size
-window_width: int = chunk_dimensions.x*tile_size
-window_height: int = chunk_dimensions.y*tile_size
-window_dimensions: Vector = Vector(window_width, window_height)
+window_width: int = chunk_width*tile_size
+window_height: int = chunk_height*tile_size
+window_dimensions = window_width, window_height
 tick: int = 0
-gamestates: tuple[str, ...] = 'menu', 'main', 'end'
-gamestate: str = gamestates[0]
