@@ -6,8 +6,12 @@ from pytmx.util_pygame import load_pygame
 from tile import Tile
         
 def game() -> None:
-    pass
-        
+    for x, y, surface in ground.tiles():
+        window.blit(surface, (x*conf.tile_size,y*conf.tile_size))
+    
+    for x, y, surface in walls.tiles():
+        window.blit(surface, (x*conf.tile_size,y*conf.tile_size))        
+
 def main() -> None:
     display.set_caption(conf.title)
         
@@ -34,28 +38,13 @@ def exit() -> None:
     
 if __name__ == "__main__":
     pygame.init()
-    
+    path = "c:/Harford/tiled_project/map_003.tmx"
     clock = time.Clock()
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE | pygame.SCALED | pygame.RESIZABLE)
-    map = load_pygame("map.tmx")
+    map = load_pygame(path)
+    layers = map.layers
+    ground = map.get_layer_by_name("ground")
+    walls = map.get_layer_by_name("walls")
     
-    
-    #print(dir(map))
-    
-    
-    # #print(dir(tile_data))
-    # print(tmx.layers)
-    #  = tmx.get_layer_by_name("Floor")
-    # #walls = tmx.get_layer_by_name("Walls")
-    # #player = tmx.get_layer_by_name("Player")
-    # tiles = list(floor.tiles())
-    
-    # pygame_surface = tile_map.get_tile_image(x, y, layer)
-    
-    # # for x, y, surface in floor.tiles():
-    # #     floor_tiles.append((x,y,surface))
-    
-    # # for tile in floor_tiles:
-    # #     print(tile)
-
+    print("{} {} {}".format(layers, ground, walls))
     main()
