@@ -1,3 +1,4 @@
+# stores all important global values
 title = "Testing"
 fps = 60
 width, height = 16, 9
@@ -11,6 +12,4 @@ window_dimensions = window_width, window_height
 
 map_x, map_y = 0, 0
 chunk = None
-
-tick = 0
 

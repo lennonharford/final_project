@@ -3,6 +3,7 @@ import config as conf
 from groups import *
 import pytmx
 from tile import Tile
+# stores the layers in a chunk
 
 class Chunk(object):
     def __init__(self, filepath: str) -> None:
