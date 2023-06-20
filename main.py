@@ -18,7 +18,8 @@ from player import Player
 from groups import *
 import sqlite3 as sql
 from mapchunk import Chunk
-
+import dialogue_map1 as d1
+#from npc import Npc
 
 def game() -> None:
     # draws and updates the sprites
@@ -85,11 +86,18 @@ def main() -> None:
         
         # responsible for displaying and updating the sprites
         game()
+        
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_q]:
+            exit()
+
+        if player.sprite.chunk == map[0][1] and (player.sprite.rect.x // conf.tile_size, player.sprite.rect.y // conf.tile_size) == (12, 5):
+            dialog.main()
                 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
-        
+
         pygame.display.update()
         clock.tick(conf.fps)
 
@@ -124,6 +132,10 @@ if __name__ == "__main__":
     
     # adds Player sprite to the player group single
     player.add(Player(x, y, chunk, player_type))
+    
+    
+    
+    dialog = d1.Dialogue(*conf.window_dimensions)
     main()
 
 

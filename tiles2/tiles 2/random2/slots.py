@@ -50,7 +50,7 @@ class Slots(object):
                     self.pos = pygame.mouse.get_pos()
                     if self.slot1.collidepoint(self.pos):
                         print("1") 
-                        self.choose=True
+                        self.choosen=True
                     elif self.slot2.collidepoint(self.pos):
                         print("2") 
                         self.choose=True
@@ -62,7 +62,7 @@ class Slots(object):
                 self.window.fill(colors.BLACK)
                 self.input_obj.main()
                 
-            pygame.display.update()
+            pygame.display.flip()
             
             
             

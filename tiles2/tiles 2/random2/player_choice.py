@@ -11,7 +11,7 @@ class Player_Choice(object):
         self.img2 = pygame.transform.scale(img2, (200, 200))  #resize image Where 35 ,35 is the size, (x,y)
         self.font = pygame.font.Font('assets/fonts/font.ttf', 40)
         self.font2 = pygame.font.Font('assets/fonts/font.ttf', 20)
-        self.exit_color = colors.RED1
+        self.exit_color=colors.RED1
         self.choosen = False
 
         
@@ -44,11 +44,12 @@ class Player_Choice(object):
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     self.pos = pygame.mouse.get_pos()
                     if self.player1.collidepoint(self.pos):
-                        print("Player 1") 
+                        print("1") 
                         self.choosen=True
                     if self.player2.collidepoint(self.pos):
-                        print("Player 2") 
-                        self.choosen=True
+                        print("2") 
+                        self.choose=True
+ 
                         
-            pygame.display.update()
+            pygame.display.flip()
            
