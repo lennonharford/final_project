@@ -74,6 +74,6 @@ class Input(object):
             pygame.display.flip()
             self.clock.tick(30)
 
-            if self.done==True:
+            if self.done == True:
                 self.window.fill(colors.BLACK)
                 self.p_choice.main()

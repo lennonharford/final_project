@@ -19,7 +19,7 @@ from groups import *
 import sqlite3 as sql
 from mapchunk import Chunk
 import dialogue_map1 as d1
-#from npc import Npc
+from database import Database, Table
 
 def game() -> None:
     # draws and updates the sprites
@@ -100,6 +100,9 @@ def main() -> None:
 
         pygame.display.update()
         clock.tick(conf.fps)
+        
+def save():
+    saves.insert(("x", "y", "map_x", "map_y", "player_type"),(x, y, map_x, map_y, player_type))
 
 def exit() -> None:
     mixer.stop()
@@ -111,6 +114,17 @@ if __name__ == "__main__":
     clock = time.Clock()
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE)
     pygame.display.set_caption(conf.title)
+    
+    database = Database("save.db")
+    
+    saves = Table(
+        database,
+        "x INTEGER",
+        "y INTEGER",
+        "map_x INTEGER",
+        "map_y INTEGER",
+        "player_type INTEGER"
+    )
     
     # 2D map to represent the chunks
     map = [
@@ -134,8 +148,6 @@ if __name__ == "__main__":
     player.add(Player(x, y, chunk, player_type))
     
     dialog = d1.Dialogue(*conf.window_dimensions)
-    
-    
     
     main()
 
