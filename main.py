@@ -12,9 +12,12 @@ import pytmx
 from tile import Tile
 from player import Player
 from groups import *
+import sqlite3 as sql
+from mapchunk import Chunk
+
 
 def game() -> None:
-    global chunk    
+    global chunk, map_x, map_y, map    
     chunk.ground.draw(window)
     chunk.walls.draw(window)
         
@@ -24,7 +27,7 @@ def game() -> None:
     player.sprite.chunk = chunk
     
 def update_chunks():
-    global map_x, map_y, chunk
+    global map_x, map_y, chunk, map
     if player.sprite.rect.x < 0:
         map_x -= 1
         player.sprite.rect.x = conf.window_width - conf.tile_size
@@ -56,7 +59,7 @@ def update_chunks():
         player.sprite.moving = False
         player.sprite.counter = 0 
     chunk = map[map_x][map_y]
-
+    
 def main() -> None:
     display.set_caption(conf.title)
         
@@ -70,11 +73,6 @@ def main() -> None:
         
         pygame.display.update()
         clock.tick(conf.fps)
-        
-        if conf.tick == 60:
-            conf.tick = 0
-        else:
-            conf.tick += 1
 
 def exit() -> None:
     mixer.stop()
@@ -85,16 +83,20 @@ if __name__ == "__main__":
     pygame.init()
     clock = time.Clock()
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE)
+    pygame.display.set_caption(conf.title)
     
     map = [
         [Chunk("map00.tmx"), Chunk("map01.tmx"), Chunk("map02.tmx")],
         [Chunk("map10.tmx"), Chunk("map11.tmx"), Chunk("map12.tmx")],
     ]
     map_x, map_y = 0, 2
+    x, y = 3, 3
+    player_type = 1
     chunk = map[map_x][map_y]
-
-    player.add(Player(3, 3, conf.chunk, 1))
     
+    player.add(Player(x, y, chunk, player_type))
     main()
+
+
 
 

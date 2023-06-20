@@ -2,25 +2,14 @@ import pygame
 import config as conf
 from groups import *
 import pytmx
+from mapchunk import Chunk
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, chunk, player):
+    
+    def __init__(self, x: int, y: int, chunk: Chunk, player: int) -> None:
         super().__init__()
-        data = pytmx.load_pygame("maps/players.tmx")
         
-        player_names = {
-            1: ["player1a", "player1b"],
-            2: ["player2a", "player2b"]
-        }    
-            
-        images_a = []
-        for _, _, surface in data.get_layer_by_name(player_names[player][0]).tiles():
-            images_a.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
-
-        images_b = []
-        for _, _, surface in data.get_layer_by_name(player_names[player][1]).tiles():
-            images_b.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
-            
+        images_a, images_b = self._get_images(player)
             
         self.directions = {
             pygame.K_w: [images_a[1], images_b[1]],  # Up
@@ -29,6 +18,7 @@ class Player(pygame.sprite.Sprite):
             pygame.K_d: [images_a[3], images_b[3]]  # Right
         }
         
+        self.player = player
         self.chunk = chunk
         self.direction = pygame.K_s  
         self.animation_state = 0  
@@ -45,12 +35,30 @@ class Player(pygame.sprite.Sprite):
         self.animation_delay = 10 
         
         self.step = conf.pixel_size
+        
 
-    def update(self):
-        self.input()
-        self.move()
+    def update(self) -> None:
+        self._input()
+        self._move()
+        
+    def _get_images(self, player) -> tuple():
+        data = pytmx.load_pygame("maps/players.tmx")
+        player_names = {
+            1: ["player1a", "player1b"],
+            2: ["player2a", "player2b"]
+        }    
+        
+        images_a = []
+        for _, _, surface in data.get_layer_by_name(player_names[player][0]).tiles():
+            images_a.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
+
+        images_b = []
+        for _, _, surface in data.get_layer_by_name(player_names[player][1]).tiles():
+            images_b.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
+            
+        return images_a, images_b
                 
-    def input(self):
+    def _input(self) -> None:
         keys = pygame.key.get_pressed()
 
         if not self.moving:
@@ -71,7 +79,7 @@ class Player(pygame.sprite.Sprite):
                 self.destination = (self.rect.x + conf.tile_size, self.rect.y)
                 self.moving = True
                 
-    def can_move(self):
+    def _can_move(self) -> bool:
         next_x, next_y = self.destination
         
         for wall in self.chunk.walls.sprites():
@@ -79,7 +87,7 @@ class Player(pygame.sprite.Sprite):
                 return False
         return True
     
-    def animate(self):
+    def _animate(self) -> None:
         self.animation_counter += 1
         
         if self.animation_counter >= self.animation_delay:
@@ -91,13 +99,13 @@ class Player(pygame.sprite.Sprite):
             self.mask = pygame.mask.from_surface(self.image)
             self.animation_counter = 0
 
-    def move(self):
+    def _move(self) -> None:
         if self.moving:
             self.counter += 1
 
             if self.counter >= self.speed:
                 
-                if self.can_move():
+                if self._can_move():
                     dx = self.destination[0] - self.rect.x
                     dy = self.destination[1] - self.rect.y
                                         
@@ -119,4 +127,4 @@ class Player(pygame.sprite.Sprite):
                     self.moving = False
                 
                 self.counter = 0  # Reset the counter after movement
-            self.animate()
+            self._animate()
