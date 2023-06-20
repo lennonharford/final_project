@@ -133,9 +133,10 @@ if __name__ == "__main__":
     # adds Player sprite to the player group single
     player.add(Player(x, y, chunk, player_type))
     
-    
-    
     dialog = d1.Dialogue(*conf.window_dimensions)
+    
+    
+    
     main()
 
 
