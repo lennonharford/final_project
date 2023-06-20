@@ -55,7 +55,6 @@ def update_chunks():
         player.sprite.destination = player.sprite.rect.x, player.sprite.rect.y
         player.sprite.moving = False
         player.sprite.counter = 0 
-    print((map_x, map_y))
     chunk = map[map_x][map_y]
 
 def main() -> None:
