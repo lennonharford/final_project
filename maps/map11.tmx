@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="16" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../tilesets/tileset56.tsx"/>
+ <tileset firstgid="7" source="../tilesets/tileset4.tsx"/>
+ <tileset firstgid="13" source="../tilesets/tilemap_002-1.tsx"/>
+ <tileset firstgid="21" source="../tilesets/gatetileset.tsx"/>
+ <layer id="1" name="ground" width="16" height="9">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,9,8,1,1,1,
+1,1,1,1,8,18,9,1,1,1,1,8,18,8,1,1,
+1,9,8,8,9,8,8,8,1,1,8,18,9,8,1,1,
+18,8,8,18,18,8,18,9,8,8,9,8,8,1,1,1,
+8,9,18,8,1,8,8,8,18,18,9,18,1,1,1,1,
+9,9,1,1,1,1,1,8,18,9,8,8,9,1,1,1,
+1,1,1,1,1,1,1,1,1,1,8,18,18,9,1,1,
+1,1,1,1,1,1,1,1,1,1,1,8,9,9,1,1
+</data>
+ </layer>
+ <layer id="2" name="walls" width="16" height="9">
+  <data encoding="csv">
+3,3,3,3,3,3,3,3,3,3,3,21,22,3,3,3,
+0,6,5,0,6,0,5,6,0,5,6,0,0,0,6,5,
+5,6,0,6,0,0,0,6,0,6,0,0,0,0,6,0,
+6,0,0,0,0,0,0,0,6,6,0,0,0,0,6,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,6,
+0,0,0,6,6,6,0,0,0,0,0,0,0,6,5,6,
+6,6,5,0,5,6,6,6,0,0,0,0,0,0,5,0,
+5,0,0,6,6,0,6,0,6,6,6,0,0,0,6,6
+</data>
+ </layer>
+</map>

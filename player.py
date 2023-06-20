@@ -34,9 +34,9 @@ class Player(pygame.sprite.Sprite):
         self.animation_state = 0  
         self.image = self.directions[self.direction][self.animation_state]
         self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect(topleft=(x, y)) 
+        self.rect = self.image.get_rect(topleft=(x*conf.tile_size, y*conf.tile_size)) 
 
-        self.destination = x, y 
+        self.destination = x*conf.tile_size, y*conf.tile_size 
         self.moving = False 
         self.speed = 1 
 

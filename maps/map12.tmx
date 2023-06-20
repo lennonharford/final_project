@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="16" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../tilesets/tileset56.tsx"/>
+ <tileset firstgid="7" source="../tilesets/tileset.tsx"/>
+ <tileset firstgid="15" source="../tilesets/tileset44.tsx"/>
+ <tileset firstgid="23" source="../tilesets/tilemap_002-1.tsx"/>
+ <tileset firstgid="31" source="../tilesets/tileset66.tsx"/>
+ <tileset firstgid="37" source="../tilesets/tileset4.tsx"/>
+ <tileset firstgid="43" source="../tilesets/tileset6.tsx"/>
+ <layer id="1" name="ground" width="16" height="9">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,26,26,26,1,1,
+1,1,1,1,1,1,1,1,1,1,1,26,38,26,26,1,
+20,26,26,1,1,1,1,1,1,1,1,26,38,26,26,1,
+20,26,38,26,1,1,1,1,1,1,1,1,26,38,26,1,
+20,26,26,26,26,1,1,1,1,1,1,1,26,26,26,1,
+1,1,26,38,26,26,26,26,38,26,26,26,38,26,26,1,
+1,1,1,26,38,26,38,26,26,38,26,26,26,26,1,1,
+1,1,1,1,1,1,26,26,26,38,26,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <layer id="2" name="walls" width="16" height="9">
+  <data encoding="csv">
+41,48,48,48,47,47,48,48,47,48,48,0,0,0,48,47,
+11,48,47,48,48,48,48,47,48,47,48,0,0,0,0,48,
+0,0,0,0,48,47,47,48,47,48,48,0,0,0,0,48,
+0,0,0,0,0,0,0,0,48,47,48,0,0,0,0,47,
+41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,
+41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,
+41,47,0,0,0,0,0,0,0,0,0,0,0,0,0,48,
+41,48,47,48,0,0,0,0,0,0,0,0,0,0,48,48,
+41,47,47,48,47,48,47,48,47,48,48,48,48,47,48,48
+</data>
+ </layer>
+</map>

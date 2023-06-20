@@ -87,13 +87,13 @@ if __name__ == "__main__":
     window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE)
     
     map = [
-        [Chunk("map1.tmx"), Chunk("map2.tmx")],
-        [Chunk("map3.tmx"), Chunk("map4.tmx")]
+        [Chunk("map00.tmx"), Chunk("map01.tmx"), Chunk("map02.tmx")],
+        [Chunk("map10.tmx"), Chunk("map11.tmx"), Chunk("map12.tmx")],
     ]
-    map_x, map_y = 0, 0
+    map_x, map_y = 0, 2
     chunk = map[map_x][map_y]
 
-    player.add(Player(0, 0, conf.chunk, 1))
+    player.add(Player(3, 3, conf.chunk, 1))
     
     main()
 

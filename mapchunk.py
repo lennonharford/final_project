@@ -9,7 +9,7 @@ class Chunk(object):
         data = pytmx.load_pygame(f"maps/{filepath}")
         
         ground_layer = data.get_layer_by_name("ground")
-        wall_layer = data.get_layer_by_name("obstacles")
+        wall_layer = data.get_layer_by_name("walls")
         
         self.ground = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
