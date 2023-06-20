@@ -1,11 +1,16 @@
-title: str = "The Shadows Of War"
-chunk_width = 16
-chunk_height = 9
-chunk_dimensions = chunk_width, chunk_height
-fps: int = 60
-pixel_size: int = 3
-tile_size: int = 16*pixel_size
-window_width: int = chunk_width*tile_size
-window_height: int = chunk_height*tile_size
+title = "Testing"
+fps = 60
+width, height = 16, 9
+chunk_dimensions = width, height
+pixel_size = 3
+tile_size = 16*pixel_size
+tile_dimensions = tile_size, tile_size
+
+window_width, window_height = width*tile_size, height*tile_size
 window_dimensions = window_width, window_height
-tick: int = 0
+
+map_x, map_y = 0, 0
+chunk = None
+
+tick = 0
+
