@@ -8,7 +8,7 @@ import config as conf
 import pytmx
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, x, y, image):
+    def __init__(self, x: int, y: int, image: pygame.surface.Surface) -> None:
         super().__init__()
         self.x = x
         self.y = y

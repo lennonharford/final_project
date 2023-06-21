@@ -45,22 +45,22 @@ class Player(pygame.sprite.Sprite):
         self._input()
         self._move()
         
-    def _get_images(self, player) -> tuple():
+    def _get_images(self, playertype: int) -> tuple[list, list]:
         data = pytmx.load_pygame("maps/players.tmx")
         players = [
             ["player2a", "player2b"],
             ["player1a", "player1b"]
         ] 
         
-        images_a = []
-        for _, _, surface in data.get_layer_by_name(players[player][0]).tiles():
-            images_a.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
+        images_static = []
+        for _, _, surface in data.get_layer_by_name(players[playertype][0]).tiles():
+            images_static.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
 
-        images_b = []
-        for _, _, surface in data.get_layer_by_name(players[player][1]).tiles():
-            images_b.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
+        images_animated = []
+        for _, _, surface in data.get_layer_by_name(players[playertype][1]).tiles():
+            images_animated.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
             
-        return images_a, images_b
+        return images_static, images_animated
                 
     def _input(self) -> None:
         keys = pygame.key.get_pressed()

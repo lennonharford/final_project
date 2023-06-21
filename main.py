@@ -20,7 +20,7 @@ from tiles import Tile, Chunk
 from player import Player
 
 class Main(object):
-    def __init__(self):
+    def __init__(self) -> None:
         self.clock = pygame.time.Clock()
         self.window = pygame.display.set_mode(conf.window_dimensions, pygame.HWSURFACE)
         pygame.display.set_caption(conf.title)
@@ -28,15 +28,8 @@ class Main(object):
         self.fps = conf.fps
         self.database = Database("saves.db")
         self.saves = Saves(self.database)
-        
-        
-        # self.music = pygame.mixer.music
-        # self.music.load("sounds/soundtrack.mp3")
-        # self.music.play(-1)
-        
-
                 
-    def run(self):
+    def run(self) -> None:
         running = True
         while running:
             keys = pygame.key.get_pressed()
@@ -60,7 +53,6 @@ class Main(object):
             
     def exit(self) -> None:
         self.saves.close()
-        #self.music.stop()
         pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
@@ -79,14 +71,14 @@ class Game(Main):
 
         self.saves.save(self.slot, self.username, self.playertype, (self.chunk_x, self.chunk_y), (self.world_x, self.world_y))
         self.world_map = [
-            [Chunk("map00.tmx"), Chunk("map01.tmx"), Chunk("map02.tmx")],
-            [Chunk("map10.tmx"), Chunk("map11.tmx"), Chunk("map12.tmx")]
+            ["map00.tmx", "map01.tmx", "map02.tmx"],
+            ["map10.tmx", "map11.tmx", "map12.tmx"]
         ]
-        self.chunk = self.world_map[self.world_x][self.world_y]
+        self.chunk = Chunk(self.world_map[self.world_x][self.world_y])
 
         self.player = pygame.sprite.GroupSingle(Player(self.chunk_x, self.chunk_y, self.chunk, self.playertype))
     
-    def display(self, window):
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK)
         
         self.player.update()
@@ -100,10 +92,10 @@ class Game(Main):
         self._update_chunks()
         self.player.sprite.chunk = self.chunk
     
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event):
         pass
     
-    def _update_chunks(self):
+    def _update_chunks(self) -> None:
         # responsible for loading new chunks when the player leaves one
                 
         # if the player went to the left then decrease the x index of the map 2D list, 
@@ -145,10 +137,10 @@ class Game(Main):
             self.player.sprite.destination = self.player.sprite.rect.x, self.player.sprite.rect.y
             self.player.sprite.moving = False
             self.player.sprite.counter = 0 
-        self.chunk = self.world_map[self.world_x][self.world_y]
+        self.chunk = Chunk(self.world_map[self.world_x][self.world_y])
             
 class Menu(object):
-    def __init__(self):
+    def __init__(self) -> None:
         self.exit_color = colors.RED1
         self.text_color = colors.WHITE
         self.font_size = conf.pixel_size*4
@@ -159,7 +151,7 @@ class Menu(object):
         self.btn_settings = Text((conf.window_width // 2, 5*(conf.window_height // 8)),  self.font_size*3, self.text_color, "SETTINGS")
         self.btn_tutorial = Text((conf.window_width // 2, 7*(conf.window_height // 8)), self.font_size*3, self.text_color, "HOW TO PLAY")
 
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event):
         pos = pygame.mouse.get_pos()
         
         if event.type == pygame.MOUSEMOTION:
@@ -181,7 +173,7 @@ class Menu(object):
             elif self.btn_tutorial.collides(pos):
                 return Tutorial()
 
-    def display(self, window) -> None:
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK)
 
         self.title.display(window) 
@@ -191,7 +183,7 @@ class Menu(object):
         self.btn_tutorial.display(window) 
 
 class Player_Choice(object):
-    def __init__(self, slot, username):
+    def __init__(self, slot, username) -> None:
         self.slot = slot
         self.username = username
         
@@ -210,7 +202,7 @@ class Player_Choice(object):
         self.choose_character = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "CHOOSE A CHARACTER:")
 
         
-    def display(self, window) -> None:
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK)
         
         
@@ -223,7 +215,7 @@ class Player_Choice(object):
             window.blit(self.images[1], (4*(conf.window_width // 6), 3*(conf.window_height // 8)))
         ]
                 
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event):
         pos = pygame.mouse.get_pos()
 
         if event.type == pygame.MOUSEMOTION:  
@@ -250,7 +242,7 @@ class Player_Choice(object):
                     return Game(self.slot, self.username, playertype, chunk_x, chunk_y, world_x, world_y)
                 
 class Input(object):
-    def __init__(self, slot):
+    def __init__(self, slot: int) -> None:
         self.slot = slot
         
         self.exit_color = colors.RED1
@@ -272,7 +264,7 @@ class Input(object):
         self.enter_name = Text((conf.window_width // 2, 2*(conf.window_height // 8)), self.font_size*3, self.text_color, "ENTER CHARACTER NAME:")
 
         
-    def display(self, window):
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK)
 
         self.enter_name.display(window)
@@ -283,7 +275,7 @@ class Input(object):
 
         pygame.draw.rect(window, self.color, self.input_box, (conf.window_width // 250))
 
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event):
         pos = pygame.mouse.get_pos()
 
         if event.type == pygame.MOUSEMOTION:
@@ -325,7 +317,7 @@ class Input(object):
                         self.text += event.unicode
 
 class Slots(Main):    
-    def __init__(self): 
+    def __init__(self) -> None: 
         super().__init__() 
                 
         self.slot_width = conf.window_width // 4
@@ -348,7 +340,7 @@ class Slots(Main):
         self.btn_back = Text((1*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.text_color, "BACK")
         self.choose_slot = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "CHOOSE A SLOT:")
     
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event) -> Menu | Game | Input:
         pos = pygame.mouse.get_pos()
 
         if event.type == pygame.MOUSEMOTION:
@@ -429,7 +421,7 @@ class Tutorial(object):
         self.title = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "TUTORIAL")
 
         
-    def display(self, window) -> None:
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK) 
         
         self.btn_back.display(window)
@@ -465,7 +457,7 @@ class Settings(object):
         self.btn_back = Text((1*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.text_color, "BACK")
         self.title = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "SETTINGS")
         
-    def display(self, window) -> None:
+    def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK) 
         
         self.btn_back.display(window)
