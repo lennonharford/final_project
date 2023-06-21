@@ -1,3 +1,8 @@
+__authors__    = "Lennon", "Sali"
+__license__    = "Free"
+__emails__     = "lennonh45@kprschools.ca", "salmahs24@kprschools.ca"
+
+
 import pygame, sys
 
 class Text:

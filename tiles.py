@@ -1,10 +1,22 @@
+__authors__    = "Lennon", "Sali"
+__license__    = "Free"
+__emails__     = "lennonh45@kprschools.ca", "salmahs24@kprschools.ca"
+
+
 import pygame
 import config as conf
-from groups import *
 import pytmx
-from tile import Tile
-# stores the layers in a chunk
 
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, x, y, image):
+        super().__init__()
+        self.x = x
+        self.y = y
+        self.image = pygame.transform.scale(image, (conf.tile_size, conf.tile_size))
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x * conf.tile_size
+        self.rect.y = self.y * conf.tile_size
+        
 class Chunk(object):
     def __init__(self, filepath: str) -> None:
         data = pytmx.load_pygame(f"maps/{filepath}")

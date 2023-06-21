@@ -1,3 +1,8 @@
+__authors__    = "Lennon", "Sali"
+__license__    = "Free"
+__emails__     = "lennonh45@kprschools.ca", "salmahs24@kprschools.ca"
+
+
 # By: Lennon Harford
 # Date: 2023-05-05
 # Program Details: python file containing rgb color values

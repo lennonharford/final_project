@@ -1,8 +1,12 @@
+__authors__    = "Lennon", "Sali"
+__license__    = "Free"
+__emails__     = "lennonh45@kprschools.ca", "salmahs24@kprschools.ca"
+
+
 import pygame
 import config as conf
-from groups import *
+from tiles import Tile, Chunk
 import pytmx
-from mapchunk import Chunk
 
 class Player(pygame.sprite.Sprite):
     

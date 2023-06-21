@@ -1,3 +1,8 @@
+__authors__    = "Lennon", "Sali"
+__license__    = "Free"
+__emails__     = "lennonh45@kprschools.ca", "salmahs24@kprschools.ca"
+
+
 import sqlite3 as sql
 
 class Database:
@@ -19,17 +24,24 @@ class Saves(object):
             CREATE TABLE IF NOT EXISTS saves (
                 slot INTEGER PRIMARY KEY,
                 username TEXT,
-                playertype INTEGER
+                playertype INTEGER,
+                chunk_x INTEGER,
+                chunk_y INTEGER,
+                world_x INTEGER,
+                world_y INTEGER
             )
             '''
         )
 
-    def save(self, slot: int, username: str, playertype: int) -> None:
+    def save(self, slot: int, username: str, playertype: int, chunk_position: tuple, world_position: tuple) -> None:
         # Delete any existing data for the given slot
         self.cursor.execute('DELETE FROM saves WHERE slot = ?', (slot,))
+        
+        chunk_x, chunk_y = chunk_position
+        world_x, world_y = world_position
 
         # Insert the new data
-        self.cursor.execute('INSERT INTO saves (slot, username, playertype) VALUES (?, ?, ?)', (slot, username, playertype))
+        self.cursor.execute('INSERT INTO saves (slot, username, playertype, chunk_x, chunk_y, world_x, world_y) VALUES (?, ?, ?, ?, ?, ?, ?)', (slot, username, playertype, chunk_x, chunk_y, world_x, world_y))
         self.connection.commit()
 
     def load(self, slot: int) -> tuple:
@@ -38,8 +50,8 @@ class Saves(object):
         row = self.cursor.fetchone()
 
         if row is not None:
-            _, username, playertype = row
-            return username, playertype
+            _, username, playertype, chunk_x, chunk_y, world_x, world_y = row
+            return username, playertype, chunk_x, chunk_y, world_x, world_y
         else:
             return None
         
@@ -50,8 +62,8 @@ class Saves(object):
         data = []
         for row in rows:
             if row:
-                slot, username, playertype = row
-                data.append((slot, username, playertype))
+                slot, username, playertype, chunk_x, chunk_y, world_x, world_y = row
+                data.append((slot, username, playertype, chunk_x, chunk_y, world_x, world_y))
         return data
     
     def delete(self, slot):
