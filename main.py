@@ -29,7 +29,13 @@ class Main(object):
         self.database = Database("saves.db")
         self.saves = Saves(self.database)
         
+        
+        # self.music = pygame.mixer.music
+        # self.music.load("sounds/soundtrack.mp3")
+        # self.music.play(-1)
+        
 
+                
     def run(self):
         running = True
         while running:
@@ -54,7 +60,8 @@ class Main(object):
             
     def exit(self) -> None:
         self.saves.close()
-        pygame.mixer.stop()
+        #self.music.stop()
+        pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
         
@@ -170,9 +177,9 @@ class Menu(object):
             elif self.btn_start.collides(pos):
                 return Slots()
             elif self.btn_settings.collides(pos):
-                print("GOTO settings")
+                return Settings()
             elif self.btn_tutorial.collides(pos):
-                print("GOTO tutorial")
+                return Tutorial()
 
     def display(self, window) -> None:
         window.fill(colors.BLACK)
@@ -182,7 +189,6 @@ class Menu(object):
         self.btn_start.display(window)
         self.btn_settings.display(window) 
         self.btn_tutorial.display(window) 
-
 
 class Player_Choice(object):
     def __init__(self, slot, username):
@@ -242,7 +248,6 @@ class Player_Choice(object):
                     world_x, world_y = 0, 2
             
                     return Game(self.slot, self.username, playertype, chunk_x, chunk_y, world_x, world_y)
-
                 
 class Input(object):
     def __init__(self, slot):
@@ -412,8 +417,86 @@ class Slots(Main):
             else:
                 slot_text = Text((rect.centerx, rect.bottom + 1*(conf.window_height // 10)), self.font_size*2, self.text_color, f"SLOT {i+1}")
                 slot_text.display(window)
-     
+
+class Tutorial(object):
+    def __init__(self) -> None:        
+        self.exit_color = colors.RED1
+        self.text_color = colors.WHITE
+        self.font_size = conf.pixel_size*4
+        
+        self.btn_exit = Text((9*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.exit_color, "EXIT")
+        self.btn_back = Text((1*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.text_color, "BACK")
+        self.title = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "TUTORIAL")
+
+        
+    def display(self, window) -> None:
+        window.fill(colors.BLACK) 
+        
+        self.btn_back.display(window)
+        self.btn_exit.display(window)
+        self.title.display(window)
+                
+    def handle_event(self, event: pygame.event.Event) -> Menu:
+        pos = pygame.mouse.get_pos()
+
+        if event.type == pygame.MOUSEMOTION:  
+                      
+            if self.btn_exit.collides(pos):
+                self.btn_exit.color = self.exit_color
+            else:
+                self.btn_exit.color = self.text_color
+                
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            
+            if self.btn_exit.collides(pos):                
+                pygame.quit()
+                sys.exit()
+            
+            if self.btn_back.collides(pos):
+                return Menu()    
+
+class Settings(object):
+    def __init__(self) -> None:        
+        self.exit_color = colors.RED1
+        self.text_color = colors.WHITE
+        self.font_size = conf.pixel_size*4
+        
+        self.btn_exit = Text((9*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.exit_color, "EXIT")
+        self.btn_back = Text((1*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.text_color, "BACK")
+        self.title = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "SETTINGS")
+        
+    def display(self, window) -> None:
+        window.fill(colors.BLACK) 
+        
+        self.btn_back.display(window)
+        self.btn_exit.display(window)
+        self.title.display(window)
+                
+    def handle_event(self, event: pygame.event.Event) -> Menu:
+        pos = pygame.mouse.get_pos()
+
+        if event.type == pygame.MOUSEMOTION:  
+                      
+            if self.btn_exit.collides(pos):
+                self.btn_exit.color = self.exit_color
+            else:
+                self.btn_exit.color = self.text_color
+                
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            
+            if self.btn_exit.collides(pos):                
+                pygame.quit()
+                sys.exit()
+            
+            if self.btn_back.collides(pos):
+                return Menu()    
+             
 if __name__ == "__main__":
     pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.set_volume(conf.volume)
+    pygame.mixer.music.load("sounds/soundtrack.mp3")
+    pygame.mixer.music.play(-1)
+    
     main = Main()
     main.run()

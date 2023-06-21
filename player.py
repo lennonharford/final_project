@@ -47,17 +47,17 @@ class Player(pygame.sprite.Sprite):
         
     def _get_images(self, player) -> tuple():
         data = pytmx.load_pygame("maps/players.tmx")
-        player_names = {
-            1: ["player1a", "player1b"],
-            2: ["player2a", "player2b"]
-        }    
+        players = [
+            ["player2a", "player2b"],
+            ["player1a", "player1b"]
+        ] 
         
         images_a = []
-        for _, _, surface in data.get_layer_by_name(player_names[player][0]).tiles():
+        for _, _, surface in data.get_layer_by_name(players[player][0]).tiles():
             images_a.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
 
         images_b = []
-        for _, _, surface in data.get_layer_by_name(player_names[player][1]).tiles():
+        for _, _, surface in data.get_layer_by_name(players[player][1]).tiles():
             images_b.append(pygame.transform.scale(surface, conf.tile_dimensions).convert_alpha())
             
         return images_a, images_b
