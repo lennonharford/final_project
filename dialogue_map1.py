@@ -56,10 +56,11 @@ class Dialogue(object):
                     running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_n and self.show_press_n_text:
-                        if self.dialogue_index < len(self.dialogue_texts) - 1:
+                        print((self.dialogue_index, len(self.dialogue_texts)))
+                        if self.dialogue_index < len(self.dialogue_texts) - 2:
                             self.dialogue_index += 1  # Increment the dialogue index
                         else:
-                            running=False
+                            return
                 
             self.display()
             pygame.display.update()
