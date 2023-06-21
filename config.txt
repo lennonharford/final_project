@@ -1,0 +1,7 @@
+pixel_size:4
+volume:0.03
+mute:False
+up:119
+down:115
+left:97
+right:114

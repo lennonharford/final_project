@@ -16,15 +16,15 @@ class Player(pygame.sprite.Sprite):
         images_a, images_b = self._get_images(player)
             
         self.directions = {
-            pygame.K_w: [images_a[1], images_b[1]],  # Up
-            pygame.K_s: [images_a[0], images_b[0]],  # Down
-            pygame.K_a: [images_a[2], images_b[2]],  # Left
-            pygame.K_d: [images_a[3], images_b[3]]  # Right
+            conf.up: [images_a[1], images_b[1]],  # Up
+            conf.down: [images_a[0], images_b[0]],  # Down
+            conf.left: [images_a[2], images_b[2]],  # Left
+            conf.right: [images_a[3], images_b[3]]  # Right
         }
         
         self.player = player
         self.chunk = chunk
-        self.direction = pygame.K_s  
+        self.direction = conf.up 
         self.animation_state = 0  
         self.image = self.directions[self.direction][self.animation_state]
         self.mask = pygame.mask.from_surface(self.image)
@@ -66,20 +66,20 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if not self.moving:
-            if keys[pygame.K_w]:
-                self.direction = pygame.K_w
+            if keys[conf.up]:
+                self.direction = conf.up
                 self.destination = (self.rect.x, self.rect.y - conf.tile_size)
                 self.moving = True
-            elif keys[pygame.K_s]:
-                self.direction = pygame.K_s
+            elif keys[conf.down]:
+                self.direction = conf.down
                 self.destination = (self.rect.x, self.rect.y + conf.tile_size)
                 self.moving = True
-            elif keys[pygame.K_a]:
-                self.direction = pygame.K_a
+            elif keys[conf.left]:
+                self.direction = conf.left
                 self.destination = (self.rect.x - conf.tile_size, self.rect.y)
                 self.moving = True
-            elif keys[pygame.K_d]:
-                self.direction = pygame.K_d
+            elif keys[conf.right]:
+                self.direction = conf.right
                 self.destination = (self.rect.x + conf.tile_size, self.rect.y)
                 self.moving = True
                 
