@@ -18,6 +18,8 @@ from database import Database, Saves
 import pytmx
 from tiles import Tile, Chunk
 from player import Player
+from npc import Npc
+from dialogue_map1 import Dialogue
 
 class Main(object):
     def __init__(self) -> None:
@@ -60,7 +62,8 @@ class Main(object):
 class Game(Main):
     def __init__(self, slot, username, playertype, chunk_x, chunk_y, world_x, world_y) -> None:
         super().__init__()
-            
+        
+        self.dialog = Dialogue(conf.window_width, conf.window_height)
         self.slot = slot
         self.username = username 
         self.playertype = playertype
@@ -77,7 +80,8 @@ class Game(Main):
         self.chunk = Chunk(self.world_map[self.world_x][self.world_y])
 
         self.player = pygame.sprite.GroupSingle(Player(self.chunk_x, self.chunk_y, self.chunk, self.playertype))
-    
+        self.npc =  pygame.sprite.GroupSingle(Npc(6, 4, 1, 2, "assets/images/player1.png"))
+        
     def display(self, window: pygame.surface.Surface) -> None:
         window.fill(colors.BLACK)
         
@@ -89,6 +93,12 @@ class Game(Main):
         self.player.draw(window)
         self.player.update()    
         
+        if (self.npc.sprite.world_x, self.npc.sprite.world_y) == (self.world_x, self.world_y):
+            self.npc.draw(window)
+            self.npc.update()
+            
+        if self.npc.sprite.player_close(self.player, (self.world_x, self.world_y)):
+            self.dialog.main()
         self._update_chunks()
         self.player.sprite.chunk = self.chunk
     
@@ -498,7 +508,6 @@ class Settings(object):
             
             elif self.btn_back.collides(pos):
                 return Menu()    
-
 
 class GameOver(object):
     def __init__(self) -> None:        

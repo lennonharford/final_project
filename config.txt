@@ -4,4 +4,4 @@ mute:False
 up:119
 down:115
 left:97
-right:114
+right:100
