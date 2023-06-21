@@ -93,8 +93,9 @@ class Game(Main):
         self.player.sprite.chunk = self.chunk
     
     def handle_event(self, event: pygame.event.Event):
-        pass
-    
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            return GameOver()
+
     def _update_chunks(self) -> None:
         # responsible for loading new chunks when the player leaves one
                 
@@ -482,7 +483,45 @@ class Settings(object):
             
             if self.btn_back.collides(pos):
                 return Menu()    
-             
+
+class GameOver(object):
+    def __init__(self) -> None:        
+        self.exit_color = colors.RED1
+        self.text_color = colors.WHITE
+        self.font_size = conf.pixel_size*4
+        
+        self.btn_exit = Text((9*(conf.window_width // 10), 1*(conf.window_height // 10)), self.font_size*2, self.exit_color, "EXIT")
+        self.btn_back = Text((conf.window_width // 2, 3*(conf.window_height // 4)), self.font_size*3, self.exit_color, "BACK TO MAIN MENU")
+        self.title = Text((conf.window_width // 2, 1*(conf.window_height // 8)), self.font_size*3, self.text_color, "GAME OVER!")
+        
+    def display(self, window: pygame.surface.Surface) -> None:
+        window.fill(colors.BLACK) 
+        
+        self.btn_back.display(window)
+        self.btn_exit.display(window)
+        self.title.display(window)
+                
+    def handle_event(self, event: pygame.event.Event) -> Menu:
+        pos = pygame.mouse.get_pos()
+
+        if event.type == pygame.MOUSEMOTION:  
+                      
+            if self.btn_exit.collides(pos):
+                self.btn_exit.color = self.exit_color
+            else:
+                self.btn_exit.color = self.text_color
+                
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            
+            if self.btn_exit.collides(pos):                
+                pygame.quit()
+                sys.exit()
+            
+            if self.btn_back.collides(pos):
+                return Menu()    
+
+
+
 if __name__ == "__main__":
     pygame.init()
     pygame.mixer.init()
